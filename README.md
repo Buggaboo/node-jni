@@ -9,6 +9,7 @@ Goals
 4. Redirect node stdout to Log.debug
 5. Fix 'require()' issue, this might require hacking node.js
 6. Secure the application, or at least think of strategies
+7. Repackage NodeJNI.java as jcenter or maven repository jar
 
 FAQ
 ---
