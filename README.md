@@ -6,13 +6,16 @@ Goals
 1. Build static library -- DONE
 2. Write JNI binding
 3. Write android app to play with node.js, from a phone/tablet/wearable
-4. Fix 'require()' issue, this might require hacking node.js
+4. Redirect node stdout to Log.debug
+5. Fix 'require()' issue, this might require hacking node.js
+6. Secure the application, or at least think of strategies
 
 FAQ
 ---
 
 Why static?
-  Because the dynamic lib did not build
+
+Because the dynamic lib did not build
 
 
 

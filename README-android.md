@@ -46,6 +46,6 @@ Run these bash commands:
 ```
 
 Source:
-[Compile from the master branch from github](http://www.goland.org/nodejsonandroid/)
-[Support for android output](http://hanyugeekingstyle.blogspot.nl/2013/01/nodejs-for-android-with-consolelog.html)
-[Node stdout to android debug log](https://github.com/paddybyers/android-debuglog)
+* [Compile from the master branch from github](http://www.goland.org/nodejsonandroid/)
+* [Support for android output](http://hanyugeekingstyle.blogspot.nl/2013/01/nodejs-for-android-with-consolelog.html)
+* [Node stdout to android debug log](https://github.com/paddybyers/android-debuglog)
