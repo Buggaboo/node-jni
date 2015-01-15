@@ -1,9 +1,9 @@
-Embed node.js in an android application
-=======================================
+#POC: Embed node.js in an android application
 
-On Linux (works on Linux and linux only, 14 jan 2015)
 
-build a static library in node.js for embedding in android application (libnode.a)
+On Linux (works on Linux and linux only, 14 jan 2015), Ubuntu in my case
+
+Build a static library in node.js for embedding in android application (libnode.a)
 
 Apply these changes:
 
@@ -22,10 +22,16 @@ index 7acb7f3..aae0bf1 100755
      --install-dir=$TOOLCHAIN \
      --platform=android-9
 diff --git node.gyp node.gyp
-index 5454af2..b8590dd 100644
+index 5454af2..bd5755d 100644
 --- node.gyp
 +++ node.gyp
-@@ -73,7 +73,7 @@
+@@ -68,12 +68,13 @@
+       'lib/vm.js',
+       'lib/zlib.js',
+     ],
++    'java_home%': '<!(python -c "import os; dir=os.getenv(\'JAVA_HOME\', \'/usr/lib/jvm/java-7-openjdk-amd64\'); assert os.path.exists(os.path.join(dir, \'include/jni.h\')), \'Point \\$JAVA_HOME or the java_home gyp variable to a directory containing include/jni.h!\'; print dir")',
+   },
+ 
    'targets': [
      {
        'target_name': 'node',
@@ -34,6 +40,23 @@ index 5454af2..b8590dd 100644
  
        'dependencies': [
          'node_js2c#host',
+@@ -84,6 +85,7 @@
+         'tools/msvs/genfiles',
+         'deps/uv/src/ares',
+         '<(SHARED_INTERMEDIATE_DIR)' # for node_natives.h
++        , '<(java_home)/include'
+       ],
+ 
+       'sources': [
+@@ -147,6 +149,8 @@
+         'src/util.h',
+         'src/util-inl.h',
+         'src/util.cc',
++        'src/node_jni.h',
++        'src/node_jni.cc',
+         'deps/http_parser/http_parser.h',
+         '<(SHARED_INTERMEDIATE_DIR)/node_natives.h',
+         # javascript files to make for an even more pleasant IDE experience
 ```
 
 Run these bash commands:
