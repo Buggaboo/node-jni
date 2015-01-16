@@ -21,7 +21,7 @@ Not necessarily in this order:
 News
 ----
 
-`16 jan 2015`
+_16 jan 2015_
 
 Apparently, I wasn't paying much attention to how android handles NDK/JNI.
 Android's `System.loadLibrary` only accepts *.so files, dynamic linking library / shared object, thingies.
