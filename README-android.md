@@ -5,6 +5,8 @@ On Linux (works on Linux and linux only, 14 jan 2015), Ubuntu in my case
 
 Build a static library in node.js for embedding in android application (libnode.a)
 
+You can find `node_jni.*` in my project.
+
 Apply these changes:
 
 ```diff
@@ -36,7 +38,7 @@ index 5454af2..bd5755d 100644
      {
        'target_name': 'node',
 -      'type': 'executable',
-+      'type': 'shared_library',
++      'type': 'static_library',
  
        'dependencies': [
          'node_js2c#host',
