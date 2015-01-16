@@ -36,7 +36,7 @@ index 5454af2..bd5755d 100644
      {
        'target_name': 'node',
 -      'type': 'executable',
-+      'type': 'static_library',
++      'type': 'shared_library',
  
        'dependencies': [
          'node_js2c#host',
@@ -62,7 +62,7 @@ index 5454af2..bd5755d 100644
 Run these bash commands:
 
 ```bash
-> git clone ...node.js on github...
+> git clone git@github.com:joyent/node.git
 > cd node
 > source ./android-configure $ANDROID_NDK && make
 > mv `which python` borkenPython && ln -s /usr/bin/python2.7 android-toolchain/bin/python

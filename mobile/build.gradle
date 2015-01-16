@@ -1,8 +1,18 @@
+apply plugin: 'android-sdk-manager'
 apply plugin: 'com.android.application'
+apply plugin: 'android-native-dependencies'
 
 android {
     compileSdkVersion 21
     buildToolsVersion "21.1.2"
+
+    // prevent ndk from building automagically
+    android {
+        sourceSets.main {
+            jniLibs.srcDir 'src/main/libs' // for shared objects
+            jni.srcDirs = [] //disable automatic ndk-build
+        }
+    }
 
     defaultConfig {
         applicationId "nl.sison.android.node_jni"

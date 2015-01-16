@@ -45,6 +45,9 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        // call NodeJNI
+        NodeJNI.start(2, new String[]{"nodejs", "-v"});
     }
 
     @Override
