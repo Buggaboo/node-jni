@@ -5,6 +5,9 @@
 
 #include "node_jni.h"
 
+/**
+ * Ol' dirty trick to convert const char* to char*
+ */
 union charunion {
   char *chr;
   const char* cchr;
@@ -21,13 +24,15 @@ namespace node
 
     int len = env->GetArrayLength(jni_argv); // should be equal to argc
 
-    const char** argv = new const char*[len];
+    char** argv = new char*[len];
     jstring* jstringArr = new jstring[len];
 
     // machine value type conversion, wow, gotta love high-level abstractions...
     for (int i=0; i<len; i++) {
         jstringArr[i] = (jstring) env->GetObjectArrayElement(jni_argv, i);
-        argv[i] = env->GetStringUTFChars(jstringArr[i], 0);
+        charunion char_union;
+        char_union.cchr = env->GetStringUTFChars(jstringArr[i], 0);
+        argv[i] = char_union.chr;
     }
 
     // capture exit result
