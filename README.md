@@ -7,7 +7,7 @@ Goals
 Not necessarily in this order:
 * Write JNI binding -- DONE
 * Build static library -- DONE
-* Write android make *.mk file
+* Write android make `{Application, Android}.mk` file
 * Test build
 * Write android app to play with node.js, from a phone/tablet/wearable
 * Release! (Profit?!?!?!?! Nah, collect bug reports and cultivate grey hair.)
@@ -40,3 +40,12 @@ It produces a broken so, that is missing some or all dependencies.
 The next step, imho, is to write an mk file (android make), in the node workspace,
 to generate a `libnode.so`.
 
+
+But this is blocking:
+
+```
+[armeabi] SharedLibrary  : libnode.so
+/android-ndk-r10/toolchains/arm-linux-androideabi-4.6/prebuilt/linux-x86_64/bin/../lib/gcc/arm-linux-androideabi/4.6/../../../../arm-linux-androideabi/bin/ld: ./obj/local/armeabi/objs/node/__/src/node_jni.o: in function Java_NodeJNI_start:/git-repositories/node/jni/../src/node_jni.cc:40: error: undefined reference to 'node::Start(int, char**)'
+collect2: ld returned 1 exit status
+make: *** [obj/local/armeabi/libnode.so] Error 1
+```

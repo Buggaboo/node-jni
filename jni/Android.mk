@@ -1,5 +1,8 @@
 LOCAL_PATH:= $(call my-dir)
 
+# TODO symlink from node workspace to  $(LOCALPATH)/node
+# TODO adapt Android.mk to reflect new path
+
 include $(CLEAR_VARS)
 
 LOCAL_MODULE    := node
