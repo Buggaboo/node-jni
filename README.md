@@ -11,7 +11,7 @@ Not necessarily in this order:
 * Test build
 * Write android app to play with node.js, from a phone/tablet/wearable
 * Release! (Profit?!?!?!?! Nah, collect bug reports and cultivate grey hair.)
-* Redirect node stdout to Log.debug, or to TextView
+* Redirect node stdout to Log.debug, or to TextView, see `fprintf(stdout...`,
 * Fix 'require()' issue, this might require hacking node.js
 * Build *.so for arm, arm64, x86, x86_64, mips
 * Secure the application, or at least think of strategies
