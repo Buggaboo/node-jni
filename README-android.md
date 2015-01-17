@@ -65,10 +65,25 @@ Run these bash commands:
 
 ```bash
 > git clone git@github.com:joyent/node.git
-> cd node
+> cd node # aka node workspace
 > source ./android-configure $ANDROID_NDK && make
 > mv `which python` borkenPython && ln -s /usr/bin/python2.7 android-toolchain/bin/python
 ```
+
+By now you should have all the static libraries required, to finish building `libnode.so`.
+
+Now do the following:
+1. Create a directory on the node workspace:
+```bash
+> mkdir -p jni
+```
+2. Copy `Application.mk` to the node workspace
+3. Copy `Android.mk` (for building `libnode.so`) to ./node/jni/
+4. Go to the node workspace again and run (I assume you have the `$ANDROID_NDK` setup):
+```bash
+export NDK_PROJECT_PATH=`pwd` ; ndk-build
+```
+4. If everything went well you are rewarded with a fully functional libnode.so
 
 Source:
 * [Compile from the master branch from github](http://www.goland.org/nodejsonandroid/)
