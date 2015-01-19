@@ -17,6 +17,10 @@ union charunion {
 
 using namespace node;
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * TODO I can't decide on snake, camel case or C-style abbrev.
  */
@@ -57,4 +61,6 @@ JNIEXPORT jint JNICALL Java_NodeJNI_start(JNIEnv *env, jobject obj, jint jni_arg
     return returnValue;
 }
 
-
+#ifdef __cplusplus
+}
+#endif

@@ -3,9 +3,9 @@
 
 On Linux (works on Linux and linux only, 14 jan 2015), Ubuntu in my case
 
-Build a static library in node.js for embedding in android application (libnode.a)
+Build a [node.js](http://nodejs.org/) shared library (libnode.so) for embedding in android applications
 
-You can find `node_jni.*` in my project.
+You can find `node_jni.{cc,h}` in my project.
 
 Apply these changes:
 
@@ -38,7 +38,7 @@ index 5454af2..bd5755d 100644
      {
        'target_name': 'node',
 -      'type': 'executable',
-+      'type': 'static_library',
++      'type': 'shared_library',
  
        'dependencies': [
          'node_js2c#host',
@@ -65,25 +65,18 @@ Run these bash commands:
 
 ```bash
 > git clone git@github.com:joyent/node.git
+> git clone git@github.com:buggaboo/node-jns.git
+> find ln -s node-jni/src-cpp/ -exec ln -s {} node/src/ \;
 > cd node # aka node workspace
-> source ./android-configure $ANDROID_NDK && make
 > mv `which python` borkenPython && ln -s /usr/bin/python2.7 android-toolchain/bin/python
+> virtualenv --system-site-packages venv
+> source ./android-configure
+> source ./venv/bin/activate
+> make
 ```
 
-By now you should have all the static libraries required, to finish building `libnode.so`.
-
-Now do the following:
-1. Create a directory on the node workspace:
-```bash
-> mkdir -p jni
-```
-2. Copy `Application.mk` to the node workspace
-3. Copy `Android.mk` (for building `libnode.so`) to ./node/jni/
-4. Go to the node workspace again and run (I assume you have the `$ANDROID_NDK` setup):
-```bash
-export NDK_PROJECT_PATH=`pwd` ; ndk-build
-```
-4. If everything went well you are rewarded with a fully functional libnode.so
+You need virtualenv to install python modules that get broken by the symbolic linking
+of `/usr/lib/python`.
 
 Source:
 * [Compile from the master branch from github](http://www.goland.org/nodejsonandroid/)

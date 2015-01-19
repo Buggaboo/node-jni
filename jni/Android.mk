@@ -43,6 +43,7 @@ LOCAL_STATIC_LIBRARIES += \
 
 LOCAL_SRC_FILES := ../src/node_jni.cc
 
+#LOCAL_ALLOW_UNDEFINED_SYMBOLS := true # it compiles, but solves nothing
 
 LOCAL_LDLIBS := -llog 
 
