@@ -21,6 +21,19 @@ Not necessarily in this order:
 News
 ----
 
+_19 jan 2015_
+
+The function calls were being mangled beyond all recognition, due to
+the deps being compiled with standard armeabi toolchain version 4.6
+getting mixed with version 4.8.
+
+The dependencies were also getting mangled badly due to this reason.
+
+A patch for all the required changes will be released soon.
+
+See: [README-android.md](https://github.com/Buggaboo/node-jni/blob/master/README-android.md).
+
+
 _16 jan 2015_
 
 Apparently, I wasn't paying much attention to how android handles NDK/JNI.
