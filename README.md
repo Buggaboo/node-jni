@@ -33,6 +33,9 @@ A patch for all the required changes will be released soon.
 
 See: [README-android.md](https://github.com/Buggaboo/node-jni/blob/master/README-android.md).
 
+Update: found [this](https://code.google.com/p/chromium/issues/detail?id=61430).
+The `--as-needed` compiler switch might be disregarding stuff in the build prematurely.
+
 
 _16 jan 2015_
 
