@@ -68,9 +68,9 @@ Run these bash commands:
 > git clone git@github.com:buggaboo/node-jni.git
 > find node-jni/src-cpp/ -exec ln -s {} node/src/ \;
 > cd node # aka node workspace
-> mv `which python` borkenPython && ln -s /usr/bin/python2.7 android-toolchain/bin/python
-> virtualenv --system-site-packages venv
 > source ./android-configure
+> mv ./android-toolchain/bin/python borkenPython && ln -s /usr/bin/python2.7 android-toolchain/bin/python
+> virtualenv --system-site-packages venv # if missing: $(sudo pip install {git,...}) or $(sudo apt-get install {requests...})
 > source ./venv/bin/activate
 > make
 ```
