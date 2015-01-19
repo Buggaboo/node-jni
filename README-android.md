@@ -65,8 +65,8 @@ Run these bash commands:
 
 ```bash
 > git clone git@github.com:joyent/node.git
-> git clone git@github.com:buggaboo/node-jns.git
-> find ln -s node-jni/src-cpp/ -exec ln -s {} node/src/ \;
+> git clone git@github.com:buggaboo/node-jni.git
+> find node-jni/src-cpp/ -exec ln -s {} node/src/ \;
 > cd node # aka node workspace
 > mv `which python` borkenPython && ln -s /usr/bin/python2.7 android-toolchain/bin/python
 > virtualenv --system-site-packages venv
@@ -79,6 +79,7 @@ You need virtualenv to install python modules that get broken by the symbolic li
 of `/usr/lib/python`.
 
 Source:
+* [The commit that got this ball rolling](https://github.com/joyent/node/commit/5e4e8ec429381a8d1eebe31647e9daaaae42c54b)
 * [Compile from the master branch from github](http://www.goland.org/nodejsonandroid/)
 * [Support for android output](http://hanyugeekingstyle.blogspot.nl/2013/01/nodejs-for-android-with-consolelog.html)
 * [Node stdout to android debug log](https://github.com/paddybyers/android-debuglog)
