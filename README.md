@@ -27,6 +27,13 @@ News
 
 _22 jan 2015_
 
+Brainfart: I wanna play with [lzham compression](https://code.google.com/p/lzham/). Maybe something for [IO.js](https://iojs.org).
+
+I should make IO.js embeddable in android too.
+
+
+_22 jan 2015_
+
 If applied [my patch](android-shared-lib.patch) can fix [nodejs master branch](https://github.com/joyent/node) to
 build a shared library for Android.
 

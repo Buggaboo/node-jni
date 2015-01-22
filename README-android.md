@@ -46,7 +46,7 @@ index 66cb312..bc8011d 100755
    o['variables']['v8_optimized_debug'] = 0  # Compile with -O0 in debug builds.
    o['variables']['v8_random_seed'] = 0  # Use a random seed for hash tables.
    o['variables']['v8_use_snapshot'] = b(not options.without_snapshot)
-+  o['variables']['v8_compress_startup_data'] = "off"
++#  o['variables']['v8_compress_startup_data'] = "off"
  
    # assume shared_v8 if one of these is set?
    if options.shared_v8_libpath:
