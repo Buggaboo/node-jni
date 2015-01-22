@@ -1,16 +1,20 @@
 # node-jni
 Access node.js on jvm/dalvik/ART, read: android.
 
+General idea
+------------
+
+I work towards the day when the back end nodejs engineer can write the
+code to do the communication plumbing for the (android) mobile front end...
+
 Goals
 -----
 
 Not necessarily in this order:
-* Write JNI binding -- DONE
-* Build static library -- DONE
-* Write android make `{Application, Android}.mk` file
-* Test build
+* Build shared library -- DONE
+* Write JNI binding, aka borrow from [joeferner/node-java](https://github.com/joeferner/node-java)
 * Write android app to play with node.js, from a phone/tablet/wearable
-* Release! (Profit?!?!?!?! Nah, collect bug reports and cultivate grey hair.)
+* Release! Profit?!?!?!?! Nah, collect bug reports and cultivate grey hair.
 * Redirect node stdout to Log.debug, or to TextView, see `fprintf(stdout...` and [this link](http://stackoverflow.com/questions/23352592/redirecting-stdin-and-stdout-of-c-program-in-android),
 * Fix 'require()' issue, this might require hacking node.js
 * Build *.so for arm, arm64, x86, x86_64, mips
@@ -20,6 +24,13 @@ Not necessarily in this order:
 
 News
 ----
+
+_22 jan 2015_
+
+If applied [my patch](android-shared-lib.patch) can fix [nodejs master branch](https://github.com/joyent/node) to
+build a shared library for Android.
+
+The next step would be to write callbacks for nodejs <-> android I/O. Stay tuned for more updates.
 
 _19 jan 2015_
 
