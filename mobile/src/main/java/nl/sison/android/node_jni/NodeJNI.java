@@ -14,10 +14,6 @@ public class NodeJNI {
 
     static
     {
-        System.loadLibrary("chrome_zlib");
-        System.loadLibrary("v8_base.arm");
-        System.loadLibrary("v8_nosnapshot.arm");
-        System.loadLibrary("http_parser");
         System.loadLibrary("node");
     }
 
