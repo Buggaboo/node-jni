@@ -13,6 +13,7 @@ Goals
 Not necessarily in this order:
 * Build shared library -- DONE
 * Redirect node stdout to Log.debug, or to TextView, see `fprintf(stdout...` and [this link](http://stackoverflow.com/questions/23352592/redirecting-stdin-and-stdout-of-c-program-in-android),
+* Change where `require()` stores stuff (gyp parameter?)
 * Write JNI binding, aka borrow from [joeferner/node-java](https://github.com/joeferner/node-java) and [android-cpp-sdk](https://code.google.com/p/android-cpp-sdk/)
 * Write android app to play with node.js, from a phone/tablet/wearable
 * Release! Profit?!?!?!?! Nah, collect bug reports and cultivate grey hair.
