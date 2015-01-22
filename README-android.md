@@ -38,18 +38,6 @@ index 7acb7f3..ffabab4 100755
 +    --without-npm
 +    
 +
-diff --git configure configure
-index 66cb312..bc8011d 100755
---- configure
-+++ configure
-@@ -652,6 +652,7 @@ def configure_v8(o):
-   o['variables']['v8_optimized_debug'] = 0  # Compile with -O0 in debug builds.
-   o['variables']['v8_random_seed'] = 0  # Use a random seed for hash tables.
-   o['variables']['v8_use_snapshot'] = b(not options.without_snapshot)
-+#  o['variables']['v8_compress_startup_data'] = "off"
- 
-   # assume shared_v8 if one of these is set?
-   if options.shared_v8_libpath:
 diff --git deps/cares/android-configure deps/cares/android-configure
 index 5299e5c..1d1e142 100755
 --- deps/cares/android-configure
@@ -64,19 +52,10 @@ index 5299e5c..1d1e142 100755
      --install-dir=$TOOLCHAIN \
      --platform=android-9
 diff --git deps/cares/cares.gyp deps/cares/cares.gyp
-index dfa35a2..9d1f265 100644
+index dfa35a2..b975a4b 100644
 --- deps/cares/cares.gyp
 +++ deps/cares/cares.gyp
-@@ -1,4 +1,8 @@
- {
-+  'variables': {
-+    'OS%': '<!(echo $OS)',
-+  },
-+
-   'target_defaults': {
-     'conditions': [
-       ['OS!="win"', {
-@@ -151,6 +155,7 @@
+@@ -151,6 +151,7 @@
          [ 'OS=="android"', {
            'include_dirs': [ 'config/android' ],
            'sources': [ 'config/android/ares_config.h' ],
@@ -101,18 +80,6 @@ index 9e6ef3c..7818ee8 100644
  
  /* Define to 1 if you have the `gettimeofday' function. */
  #define HAVE_GETTIMEOFDAY 1
-diff --git deps/v8/build/android.gypi deps/v8/build/android.gypi
-index 46ece08..9d33fc0 100644
---- deps/v8/build/android.gypi
-+++ deps/v8/build/android.gypi
-@@ -271,7 +271,6 @@
-           '-Wl,-z,noexecstack',
-           '-Wl,--gc-sections',
-           '-Wl,-O1',
--          '-Wl,--as-needed',
-         ],
-       }],
-     ],  # target_conditions
 diff --git node.gyp node.gyp
 index b59474e..d606c49 100644
 --- node.gyp
