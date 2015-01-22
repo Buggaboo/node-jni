@@ -166,7 +166,7 @@ Run these bash commands:
 > git clone git@github.com:joyent/node.git
 > git clone git@github.com:buggaboo/node-jni.git
 > find node-jni/src-cpp/ -exec ln -s {} node/src/ \;
-> cd node # aka node workspace
+> cd node
 > source ./android-configure
 > mv ./android-toolchain/bin/python borkenPython && ln -s /usr/bin/python2.7 android-toolchain/bin/python
 > virtualenv --system-site-packages venv # if missing: $(sudo pip install {git,...}) or $(sudo apt-get install {requests...})
@@ -174,7 +174,7 @@ Run these bash commands:
 > make -j5
 ```
 
-I arrived by `-j5` by counting the number of cores + 1, to build this.
+I arrived at `-j5` by counting the number of cores + 1, to build this. Your mileage may vary.
 
 You need virtualenv to install python modules that get broken by the symbolic linking
 of `/usr/lib/python`.

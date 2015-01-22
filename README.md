@@ -4,18 +4,18 @@ Access node.js on jvm/dalvik/ART, read: android.
 General idea
 ------------
 
-I work towards the day when the back end nodejs engineer can write the
-code to do the communication plumbing for the (android) mobile front end...
+I work towards the day when the back end nodejs engineer can
+code the communication plumbing for the (android) mobile front end...
 
 Goals
 -----
 
 Not necessarily in this order:
 * Build shared library -- DONE
-* Write JNI binding, aka borrow from [joeferner/node-java](https://github.com/joeferner/node-java)
+* Redirect node stdout to Log.debug, or to TextView, see `fprintf(stdout...` and [this link](http://stackoverflow.com/questions/23352592/redirecting-stdin-and-stdout-of-c-program-in-android),
+* Write JNI binding, aka borrow from [joeferner/node-java](https://github.com/joeferner/node-java) and [android-cpp-sdk](https://code.google.com/p/android-cpp-sdk/)
 * Write android app to play with node.js, from a phone/tablet/wearable
 * Release! Profit?!?!?!?! Nah, collect bug reports and cultivate grey hair.
-* Redirect node stdout to Log.debug, or to TextView, see `fprintf(stdout...` and [this link](http://stackoverflow.com/questions/23352592/redirecting-stdin-and-stdout-of-c-program-in-android),
 * Fix 'require()' issue, this might require hacking node.js
 * Build *.so for arm, arm64, x86, x86_64, mips
 * Secure the application, or at least think of strategies
@@ -29,6 +29,15 @@ _22 jan 2015_
 
 If applied [my patch](android-shared-lib.patch) can fix [nodejs master branch](https://github.com/joyent/node) to
 build a shared library for Android.
+
+Don't be alarmed by:
+
+```
+01-22 03:41:21.721  10819-10819/nl.sison.android.node_jni A/libc﹕ ../deps/uv/src/unix/proctitle.c:53: uv_setup_args: assertion "process_title.len + 1 == size" failed
+01-22 03:41:21.721  10819-10819/nl.sison.android.node_jni A/libc﹕ Fatal signal 6 (SIGABRT) at 0x00002a43 (code=-6), thread 10819 (ndroid.node_jni)
+```
+
+At least we know `node::Start` is getting called.
 
 The next step would be to write callbacks for nodejs <-> android I/O. Stay tuned for more updates.
 

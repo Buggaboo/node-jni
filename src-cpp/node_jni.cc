@@ -21,24 +21,23 @@ using namespace node;
 extern "C" {
 #endif
 
-JNIEXPORT jint JNICALL Java_nl_sison_android_nodejni_NodeJNI_start
-  (JNIEnv *, jclass, jint, jobjectArray)
-
-    int len = env->GetArrayLength(jni_argv); // should be equal to argc
+JNIEXPORT jint JNICALL Java_nl_sison_android_nodejni_NodeJNI_start (JNIEnv * env, jclass, jint java_argc, jobjectArray java_argv)
+{
+    int len = env->GetArrayLength(java_argv); // should be equal to argc
 
     char** argv = new char*[len];
     jstring* jstringArr = new jstring[len];
 
     // type conversion, wow
     for (int i=0; i<len; i++) {
-        jstringArr[i] = (jstring) env->GetObjectArrayElement(jni_argv, i);
+        jstringArr[i] = (jstring) env->GetObjectArrayElement(java_argv, i);
         charunion char_union;
         char_union.cchr = env->GetStringUTFChars(jstringArr[i], 0);
         argv[i] = char_union.chr;
     }
 
     // capture exit result
-    int returnValue = node::Start(len /*(int) jni_argc*/, argv);
+    int returnValue = node::Start(len /*(int) java_argc*/, argv);
     // TODO jint is a typedef for long on an arm 64 and how about endianness? Phrack it. Just cast.
     // figure out with macros later
 
