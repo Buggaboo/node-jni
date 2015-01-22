@@ -21,18 +21,15 @@ using namespace node;
 extern "C" {
 #endif
 
-/**
- * TODO I can't decide on snake, camel case or C-style abbrev.
- */
-/** I decided to pass a single concatenated jstring instead of an array of strings from java */
-JNIEXPORT jint JNICALL Java_NodeJNI_start(JNIEnv *env, jobject obj, jint jni_argc, jobjectArray jni_argv) {
+JNIEXPORT jint JNICALL Java_nl_sison_android_nodejni_NodeJNI_start
+  (JNIEnv *, jclass, jint, jobjectArray)
 
     int len = env->GetArrayLength(jni_argv); // should be equal to argc
 
     char** argv = new char*[len];
     jstring* jstringArr = new jstring[len];
 
-    // machine value type conversion, wow, gotta love high-level abstractions...
+    // type conversion, wow
     for (int i=0; i<len; i++) {
         jstringArr[i] = (jstring) env->GetObjectArrayElement(jni_argv, i);
         charunion char_union;
@@ -42,13 +39,13 @@ JNIEXPORT jint JNICALL Java_NodeJNI_start(JNIEnv *env, jobject obj, jint jni_arg
 
     // capture exit result
     int returnValue = node::Start(len /*(int) jni_argc*/, argv);
-    // TODO jint is a typedef for long on an arm 64 and endianness? Phrack it. Just cast.
-    // figure out macros later
+    // TODO jint is a typedef for long on an arm 64 and how about endianness? Phrack it. Just cast.
+    // figure out with macros later
 
 
     for (int i=0; i<len; i++) {
         // debug, TODO redirect stdout to android Log
-//      std::cout << std::string(argv[i]);
+//      std::cout << std::string(argv[i]); // stdout is /dev/null on Android
 
         // prevent memory leaks
         env->ReleaseStringUTFChars(jstringArr[i], argv[i]);

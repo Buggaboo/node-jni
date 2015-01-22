@@ -1,4 +1,4 @@
-package nl.sison.android.node_jni;
+package nl.sison.android.nodejni;
 
 /**
  * Note: Android only allows one JVM process per app

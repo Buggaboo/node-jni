@@ -1,4 +1,4 @@
-package nl.sison.android.node_jni;
+package nl.sison.android.nodejni;
 
 import android.app.Activity;
 import android.os.Bundle;

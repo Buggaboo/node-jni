@@ -1,4 +1,4 @@
-package nl.sison.android.node_jni;
+package nl.sison.android.nodejni;
 
 import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
