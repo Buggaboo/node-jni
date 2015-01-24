@@ -146,6 +146,16 @@ I arrived at `-j5` by counting the number of cores + 1, to build this. Your mile
 You need virtualenv to install python modules that get broken by the symbolic linking
 of `/usr/lib/python`.
 
+io.js
+-----
+
+The same steps are required for building an [io.js]() shared library, except
+for this extra bash command:
+
+```bash
+find . -name '*.mk' -exec sed -i '/-mfpu=vfpv2 \\/d' {} \; # in case you're building for plain armeabi
+```
+
 Source:
 * [The commit that got this ball rolling](https://github.com/joyent/node/commit/5e4e8ec429381a8d1eebe31647e9daaaae42c54b)
 * [Compile from the master branch from github](http://www.goland.org/nodejsonandroid/)
