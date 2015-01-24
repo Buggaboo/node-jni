@@ -1,0 +1,115 @@
+diff --git android-configure android-configure
+index 7acb7f3..ffabab4 100755
+--- android-configure
++++ android-configure
+@@ -3,7 +3,7 @@
+ export TOOLCHAIN=$PWD/android-toolchain
+ mkdir -p $TOOLCHAIN
+ $1/build/tools/make-standalone-toolchain.sh \
+-    --toolchain=arm-linux-androideabi-4.7 \
++    --toolchain=arm-linux-androideabi-4.8 \
+     --arch=arm \
+     --install-dir=$TOOLCHAIN \
+     --platform=android-9
+@@ -12,8 +12,13 @@ export AR=arm-linux-androideabi-ar
+ export CC=arm-linux-androideabi-gcc
+ export CXX=arm-linux-androideabi-g++
+ export LINK=arm-linux-androideabi-g++
++export PLATFORM=android # cares
++export OS=android # cares
+ 
+ ./configure \
+     --without-snapshot \
+     --dest-cpu=arm \
+-    --dest-os=android
++    --dest-os=android \
++    --without-npm
++    
++
+diff --git deps/cares/android-configure deps/cares/android-configure
+index 5299e5c..1d1e142 100755
+--- deps/cares/android-configure
++++ deps/cares/android-configure
+@@ -3,7 +3,7 @@
+ export TOOLCHAIN=$PWD/android-toolchain
+ mkdir -p $TOOLCHAIN
+ $1/build/tools/make-standalone-toolchain.sh \
+-    --toolchain=arm-linux-androideabi-4.7 \
++    --toolchain=arm-linux-androideabi-4.8 \
+     --arch=arm \
+     --install-dir=$TOOLCHAIN \
+     --platform=android-9
+diff --git deps/cares/cares.gyp deps/cares/cares.gyp
+index dfa35a2..b975a4b 100644
+--- deps/cares/cares.gyp
++++ deps/cares/cares.gyp
+@@ -151,6 +151,7 @@
+         [ 'OS=="android"', {
+           'include_dirs': [ 'config/android' ],
+           'sources': [ 'config/android/ares_config.h' ],
++          'defines': [ 'ANDROID', '__ANDROID__', 'DONT_HAVE_GETSERVBYPORT_R', 'HAVE_ARPA_NAMESER_H' ],
+         }],
+         [ 'OS=="solaris"', {
+           'include_dirs': [ 'config/sunos' ],
+diff --git deps/cares/config/android/ares_config.h deps/cares/config/android/ares_config.h
+index 9e6ef3c..7818ee8 100644
+--- deps/cares/config/android/ares_config.h
++++ deps/cares/config/android/ares_config.h
+@@ -116,7 +116,11 @@
+ #define HAVE_GETNAMEINFO 1
+ 
+ /* Define to 1 if you have the getservbyport_r function. */
+-#define HAVE_GETSERVBYPORT_R 1
++#ifndef DONT_HAVE_GETSERVBYPORT_R
++#  define HAVE_GETSERVBYPORT_R 1
++#else
++#  undef HAVE_GETSERVBYPORT_R
++#endif
+ 
+ /* Define to 1 if you have the `gettimeofday' function. */
+ #define HAVE_GETTIMEOFDAY 1
+diff --git node.gyp node.gyp
+index b00ab29..ab5885e 100644
+--- node.gyp
++++ node.gyp
+@@ -69,12 +69,13 @@
+       'lib/vm.js',
+       'lib/zlib.js',
+     ],
++    'java_home%': '<!(python -c "import os; dir=os.getenv(\'JAVA_HOME\', \'/usr/lib/jvm/java-7-openjdk-amd64\'); assert os.path.exists(os.path.join(dir, \'include/jni.h\')), \'Point \\$JAVA_HOME or the java_home gyp variable to a directory containing include/jni.h!\'; print dir")',
+   },
+ 
+   'targets': [
+     {
+       'target_name': 'iojs',
+-      'type': 'executable',
++      'type': 'shared_library',
+ 
+       'dependencies': [
+         'node_js2c#host',
+@@ -86,6 +87,7 @@
+         'tools/msvs/genfiles',
+         'deps/uv/src/ares',
+         '<(SHARED_INTERMEDIATE_DIR)' # for node_natives.h
++        , '<(java_home)/include'
+       ],
+ 
+       'sources': [
+@@ -101,7 +103,7 @@
+         'src/node_file.cc',
+         'src/node_http_parser.cc',
+         'src/node_javascript.cc',
+-        'src/node_main.cc',
++#        'src/node_main.cc',
+         'src/node_os.cc',
+         'src/node_v8.cc',
+         'src/node_v8_platform.cc',
+@@ -155,6 +157,8 @@
+         'src/util.h',
+         'src/util-inl.h',
+         'src/util.cc',
++        'src/node_jni.h',
++        'src/node_jni.cc',
+         'deps/http_parser/http_parser.h',
+         '<(SHARED_INTERMEDIATE_DIR)/node_natives.h',
+         # javascript files to make for an even more pleasant IDE experience
